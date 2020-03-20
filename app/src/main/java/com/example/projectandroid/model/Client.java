@@ -5,8 +5,9 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "clients")
-public class Client{
-    @PrimaryKey
+public class Client {
+
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "client_id")
     private String id;
 

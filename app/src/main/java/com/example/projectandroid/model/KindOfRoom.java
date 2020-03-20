@@ -1,50 +1,46 @@
 package com.example.projectandroid.model;
 
 import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "kindsOfRoom")
+@Entity(
+        tableName = "kindsOfRoom",
+        indices = {@Index(value = "kind_name", unique = true)}
+)
 public class KindOfRoom {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "kindOfRoom_id")
-    private String id;
+    private int id;
 
-    @ColumnInfo
-    private int kind_id;
+    //Tên Thể loại VD : Queen, Single, Double, King ...
+    @ColumnInfo(name = "kind_name")
+    private String name;
 
-    @ColumnInfo
-    private int price_id;
-
+    //Mô tả thể loại
     private String describe;
 
-    @Ignore
+    //Giá Bao nhiêu
+    @Embedded
     private Price price;
 
-    @Ignore
-    private Kind kind;
-
-    public KindOfRoom(String id, String describe, Price price, Kind kind) {
-        this.id = id;
+    public KindOfRoom(String name, String describe, Price price) {
+        this.name = name;
         this.describe = describe;
         this.price = price;
-        this.kind = kind;
-        this.kind_id = kind.getId();
-        this.price_id = price.getId();
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public int getKind_id() {
-        return kind_id;
-    }
-
-    public int getPrice_id() {
-        return price_id;
+    public String getName() {
+        return name;
     }
 
     public String getDescribe() {
@@ -53,9 +49,5 @@ public class KindOfRoom {
 
     public Price getPrice() {
         return price;
-    }
-
-    public Kind getKind() {
-        return kind;
     }
 }

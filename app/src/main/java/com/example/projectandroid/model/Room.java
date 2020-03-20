@@ -2,10 +2,18 @@ package com.example.projectandroid.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "rooms")
+@Entity(
+        tableName = "rooms",
+        foreignKeys = {@ForeignKey(entity = KindOfRoom.class,
+                parentColumns = "kindOfRoom_id",
+                childColumns = "kindOfRoom_id",
+                onUpdate = ForeignKey.CASCADE, onDelete = ForeignKey.SET_NULL)
+        }
+)
 public class Room {
 
     @PrimaryKey
@@ -14,20 +22,16 @@ public class Room {
 
     private int kindOfRoom_id;
 
-    @ColumnInfo(name = "room_name")
-    private String name;
-
     private String describe;
 
     @Ignore
     private KindOfRoom kindOfRoom;
 
-    public Room(String id, String name, String describe, KindOfRoom kindOfRoom) {
+    public Room(String id, String describe, KindOfRoom kindOfRoom) {
         this.id = id;
-        this.name = name;
         this.describe = describe;
         this.kindOfRoom = kindOfRoom;
-        this.kindOfRoom_id = kindOfRoom.getKind_id();
+        this.kindOfRoom_id = kindOfRoom.getId();
     }
 
     public String getId() {
@@ -38,15 +42,7 @@ public class Room {
         return kindOfRoom_id;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public String getDescribe() {
         return describe;
-    }
-
-    public KindOfRoom getKindOfRoom() {
-        return kindOfRoom;
     }
 }

@@ -2,15 +2,20 @@ package com.example.projectandroid.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
 
-@Entity(tableName = "booking")
+@Entity(
+        tableName = "booking",
+        foreignKeys = {@ForeignKey(entity = Room.class, parentColumns = "room_id", childColumns = "room_id"),
+                @ForeignKey(entity = Client.class, parentColumns = "client_id", childColumns = "client_id", onUpdate = ForeignKey.CASCADE)}
+)
 public class Booking {
 
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "booking_id")
     private String id;
 
@@ -40,7 +45,7 @@ public class Booking {
         this.price = price;
         this.room = room;
         this.client = client;
-        this.room_id = room.getId();
         this.client_id = client.getId();
+        this.room_id = room.getId();
     }
 }
