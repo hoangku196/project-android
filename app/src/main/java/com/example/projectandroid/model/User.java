@@ -25,5 +25,15 @@ public class User {
     @ColumnInfo(name = "user_fullName")
     private String fullName;
 
+    public String getName() {
+        return name;
+    }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
 }
