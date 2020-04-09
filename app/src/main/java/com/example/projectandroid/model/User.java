@@ -2,31 +2,29 @@ package com.example.projectandroid.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "users", indices = {@Index(value = {"user_name"}, unique = true)})
+@Entity(
+        tableName = "user"
+)
 public class User {
-
-    //Id của user được tự động tạo ra
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "user_id")
-    private int id;
+    @ColumnInfo(name = "idUser")
+    private String id;
 
-    //User Name không được trùng nhau
-    @ColumnInfo(name = "user_name")
-    private String name;
-
-    //Password của user
-    @ColumnInfo(name = "user_password")
     private String password;
-
-    //Tên đầy đủ của User
-    @ColumnInfo(name = "user_fullName")
     private String fullName;
+    private String position;
 
-    public String getName() {
-        return name;
+    public User(String id, String password, String fullName, String position) {
+        this.id = id;
+        this.password = password;
+        this.fullName = fullName;
+        this.position = position;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getPassword() {
@@ -35,5 +33,9 @@ public class User {
 
     public String getFullName() {
         return fullName;
+    }
+
+    public String getPosition() {
+        return position;
     }
 }

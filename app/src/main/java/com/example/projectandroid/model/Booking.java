@@ -10,42 +10,103 @@ import java.util.Date;
 
 @Entity(
         tableName = "booking",
-        foreignKeys = {@ForeignKey(entity = Room.class, parentColumns = "room_id", childColumns = "room_id"),
-                @ForeignKey(entity = Client.class, parentColumns = "client_id", childColumns = "client_id", onUpdate = ForeignKey.CASCADE)}
+        foreignKeys = {@ForeignKey(
+                entity = Rooms.class,
+                parentColumns = "idRoom",
+                childColumns = "idRoom",
+                onUpdate = ForeignKey.CASCADE
+        ),
+                @ForeignKey(
+                        entity = User.class,
+                        parentColumns = "idUser",
+                        childColumns = "idUser",
+                        onUpdate = ForeignKey.CASCADE
+                ),
+                @ForeignKey(
+                        entity = Client.class,
+                        parentColumns = "idClient",
+                        childColumns = "idClient",
+                        onUpdate = ForeignKey.CASCADE
+                )
+        }
 )
 public class Booking {
-
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "booking_id")
+    @PrimaryKey
+    @ColumnInfo(name = "idBooking")
     private String id;
 
-    private String room_id;
+    private String idRoom;
+    private String idClient;
+    private String idUser;
 
-    private String client_id;
-
-    @ColumnInfo(name = "booking_startTime")
-    private Date startTime;
-
-    @ColumnInfo(name = "booking_stopTime")
-    private Date stopTime;
-
-    @ColumnInfo(name = "booking_price")
-    private float price;
+    private Date dayCome;
+    private Date dayGo;
+    private float deposit;
+    private String status;
 
     @Ignore
-    private Room room;
+    private Rooms room;
 
     @Ignore
     private Client client;
 
-    public Booking(String id, Date startTime, Date stopTime, float price, Room room, Client client) {
-        this.id = id;
-        this.startTime = startTime;
-        this.stopTime = stopTime;
-        this.price = price;
+    @Ignore
+    private User user;
+
+    public Booking(Date dayCome, Date dayGo, float deposit, String status, Rooms room, Client client, User user) {
+        this.dayCome = dayCome;
+        this.dayGo = dayGo;
+        this.deposit = deposit;
+        this.status = status;
         this.room = room;
         this.client = client;
-        this.client_id = client.getId();
-        this.room_id = room.getId();
+        this.user = user;
+        this.idClient = client.getId();
+        this.idRoom = client.getId();
+        this.idUser = client.getId();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getIdRoom() {
+        return idRoom;
+    }
+
+    public String getIdClient() {
+        return idClient;
+    }
+
+    public String getIdUser() {
+        return idUser;
+    }
+
+    public Date getDayCome() {
+        return dayCome;
+    }
+
+    public Date getDayGo() {
+        return dayGo;
+    }
+
+    public float getDeposit() {
+        return deposit;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public Rooms getRoom() {
+        return room;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public User getUser() {
+        return user;
     }
 }

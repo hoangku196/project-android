@@ -12,16 +12,17 @@ import java.util.List;
 
 @Dao
 public interface ClientDAO {
+
     @Insert
-    void insertClients(Client... clients);
+    void insertClient(Client... clients);
 
     @Update
-    void updateClients(Client... clients);
+    void updateClient(Client... clients);
 
     @Delete
     void deleteClient(Client... clients);
 
-    @Query("SELECT * FROM CLIENTS")
-    List<Client> getAllClients();
+    @Query("SELECT * FROM CLIENT")
+    List<Client> getAllClient();
 
 }

@@ -6,18 +6,15 @@ import android.os.AsyncTask;
 import com.example.projectandroid.dao.BookingDAO;
 import com.example.projectandroid.database.AppDatabase;
 import com.example.projectandroid.model.Booking;
-import com.example.projectandroid.model.relation.BookingWithClient;
-import com.example.projectandroid.model.relation.BookingWithRoom;
 
 import java.util.List;
 
-public class BookingRepository {
-
+public class BookingRepo {
     private BookingDAO bookingDAO;
 
-    public BookingRepository(Context context) {
-        AppDatabase appDatabase = AppDatabase.getInstance(context);
-        this.bookingDAO = appDatabase.bookingDAO();
+    public BookingRepo(Context context) {
+        AppDatabase database = AppDatabase.getInstance(context);
+        bookingDAO = database.bookingDAO();
     }
 
     public void insert(Booking booking) {
@@ -32,12 +29,8 @@ public class BookingRepository {
         new DeleteBookingAsyncTask(bookingDAO).execute(booking);
     }
 
-    public List<BookingWithRoom> getBookingWithRoom() {
-        return bookingDAO.getRoomWithBooking();
-    }
-
-    public List<BookingWithClient> getBookingWithClient() {
-        return bookingDAO.getClientWithBooking();
+    public List<Booking> getAll() {
+        return bookingDAO.getAllBooking();
     }
 
     private static class InsertBookingAsyncTask extends AsyncTask<Booking, Void, Void> {
@@ -48,10 +41,10 @@ public class BookingRepository {
             this.bookingDAO = bookingDAO;
         }
 
+
         @Override
         protected Void doInBackground(Booking... bookings) {
-
-            bookingDAO.insertBooking(bookings);
+            bookingDAO.insertBoooking(bookings);
 
             return null;
         }
@@ -67,11 +60,11 @@ public class BookingRepository {
 
         @Override
         protected Void doInBackground(Booking... bookings) {
-
-            bookingDAO.insertBooking(bookings);
+            bookingDAO.updateBooking(bookings);
 
             return null;
         }
+
     }
 
     private static class DeleteBookingAsyncTask extends AsyncTask<Booking, Void, Void> {
@@ -84,11 +77,10 @@ public class BookingRepository {
 
         @Override
         protected Void doInBackground(Booking... bookings) {
-
-            bookingDAO.insertBooking(bookings);
+            bookingDAO.deleteBooking(bookings);
 
             return null;
         }
-    }
 
+    }
 }

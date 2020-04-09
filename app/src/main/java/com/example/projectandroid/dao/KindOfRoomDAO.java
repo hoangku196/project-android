@@ -13,14 +13,14 @@ import java.util.List;
 @Dao
 public interface KindOfRoomDAO {
     @Insert
-    void insertKinds(KindOfRoom... kinds);
+    void insertKORs(KindOfRoom... kindOfRooms);
 
     @Update
-    void updateKinds(KindOfRoom... kinds);
+    void updateKORs(KindOfRoom... kindOfRooms);
 
     @Delete
-    void deleteKinds(KindOfRoom... kinds);
+    void deleteKORs(KindOfRoom... kindOfRooms);
 
-    @Query("SELECT * FROM kindsOfRoom")
-    List<KindOfRoom> getAllKind();
+    @Query("SELECT * FROM KINDOFROOM")
+    List<KindOfRoom> getAllKindOfRoom();
 }

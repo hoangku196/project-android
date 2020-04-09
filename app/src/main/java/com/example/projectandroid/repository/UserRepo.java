@@ -1,9 +1,7 @@
 package com.example.projectandroid.repository;
 
-import android.app.Application;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import com.example.projectandroid.dao.UserDAO;
 import com.example.projectandroid.database.AppDatabase;
@@ -11,10 +9,10 @@ import com.example.projectandroid.model.User;
 
 import java.util.List;
 
-public class UserRepository {
+public class UserRepo {
     private UserDAO userDAO;
 
-    public UserRepository(Context context) {
+    public UserRepo(Context context) {
         AppDatabase database = AppDatabase.getInstance(context);
         userDAO = database.userDAO();
     }

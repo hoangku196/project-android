@@ -9,13 +9,12 @@ import com.example.projectandroid.model.Client;
 
 import java.util.List;
 
-public class ClientRepository {
-
+public class ClientRepo {
     private ClientDAO clientDAO;
 
-    public ClientRepository(Context context) {
-        AppDatabase appDatabase = AppDatabase.getInstance(context);
-        this.clientDAO = appDatabase.clientDAO();
+    public ClientRepo(Context context) {
+        AppDatabase database = AppDatabase.getInstance(context);
+        clientDAO = database.clientDAO();
     }
 
     public void insert(Client client) {
@@ -31,7 +30,7 @@ public class ClientRepository {
     }
 
     public List<Client> getAll() {
-        return clientDAO.getAllClients();
+        return clientDAO.getAllClient();
     }
 
     private static class InsertClientAsyncTask extends AsyncTask<Client, Void, Void> {
@@ -42,10 +41,10 @@ public class ClientRepository {
             this.clientDAO = clientDAO;
         }
 
+
         @Override
         protected Void doInBackground(Client... clients) {
-
-            clientDAO.insertClients(clients);
+            clientDAO.insertClient(clients);
 
             return null;
         }
@@ -61,11 +60,11 @@ public class ClientRepository {
 
         @Override
         protected Void doInBackground(Client... clients) {
-
-            clientDAO.updateClients(clients);
+            clientDAO.updateClient(clients);
 
             return null;
         }
+
     }
 
     private static class DeleteClientAsyncTask extends AsyncTask<Client, Void, Void> {
@@ -78,11 +77,10 @@ public class ClientRepository {
 
         @Override
         protected Void doInBackground(Client... clients) {
-
             clientDAO.deleteClient(clients);
 
             return null;
         }
-    }
 
+    }
 }

@@ -12,9 +12,8 @@ import java.util.List;
 
 @Dao
 public interface UserDAO {
-
     @Insert
-    void insertUsers(User... user);
+    void insertUsers(User... users);
 
     @Update
     void updateUsers(User... users);
@@ -22,6 +21,6 @@ public interface UserDAO {
     @Delete
     void deleteUsers(User... users);
 
-    @Query("SELECT * FROM USERS")
+    @Query("SELECT * FROM user")
     List<User> getAllUser();
 }
